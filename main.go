@@ -3,7 +3,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/rcmgleite/algorithms/customSort"
+	"github.com/rcmgleite/algorithms/graph"
+	"github.com/rcmgleite/algorithms/stack"
 )
 
 func main() {
@@ -63,11 +64,39 @@ func main() {
 	// fmt.Println(v)
 	// fmt.Println(customSort.IsSorted(v))
 
-	// v1 := []int{4, 6, 7, 10, 12, 2, 3, 5, 8, 9}
-	v1 := []int{12, 4, 5, 2, 3, 11, 6, 7, 10, 9}
-	fmt.Println(v1)
-	customSort.MergeSort(v1)
-	fmt.Println("Final result ", v1)
-	fmt.Printf("arraySorted = %v\n", customSort.IsSorted(v1))
+	// v1 := []int{12, 4, 5, 2, 3, 11, 6, 7, 10, 9}
+	// fmt.Println(v1)
+	// customSort.MergeSort(v1)
+	// fmt.Println("Final result ", v1)
+	// fmt.Printf("arraySorted = %v\n", customSort.IsSorted(v1))
 
+	var vertexNum = 13
+	g := graph.NewGraph(vertexNum)
+	g.AddEdge(0, 1)
+	g.AddEdge(0, 2)
+	g.AddEdge(0, 5)
+	g.AddEdge(0, 6)
+	g.AddEdge(4, 3)
+	g.AddEdge(5, 3)
+	g.AddEdge(7, 8)
+	g.AddEdge(9, 12)
+	g.AddEdge(6, 4)
+	g.AddEdge(5, 4)
+	g.AddEdge(11, 12)
+	g.AddEdge(9, 10)
+	g.AddEdge(9, 11)
+
+	for i := 0; i < vertexNum; i++ {
+		g.PrintAdjList(i)
+	}
+
+	fmt.Printf("\n\n")
+
+	dfsPaths := graph.NewDfsPaths(*g, 0)
+	fmt.Println(dfsPaths.Marked)
+	fmt.Println(dfsPaths.EdgeTo)
+
+	fmt.Printf("Has Path to %d = %v\n", 3, dfsPaths.HasPathTo(3))
+
+	stack.Print(dfsPaths.PathTo(3))
 }

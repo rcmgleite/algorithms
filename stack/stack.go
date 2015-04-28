@@ -7,21 +7,25 @@ import (
 
 // Stacker ...
 type Stacker interface {
-	Push(string) error
-	Pop() (string, error)
+	Push(int) error
+	Pop() (int, error)
 	IsEmpty() bool
 }
 
 // Print ...
-func Print(s Stacker) error {
+func Print(s Stacker) {
+	if s.(*LinkedStack) == nil {
+		fmt.Println("Error: Stack is nil")
+		return
+	}
 	for !s.IsEmpty() {
 		toPrint, err := s.Pop()
 		if err != nil {
-			return err
+			fmt.Println(err)
+			return
 		}
 		fmt.Println(toPrint)
 	}
-	return nil
 }
 
 // LinkedStack - implemented using a linked list
@@ -32,7 +36,7 @@ type LinkedStack struct {
 
 // struct that represents each node of the stack
 type node struct {
-	item string
+	item int
 	next *node
 }
 
@@ -42,7 +46,7 @@ func (s *LinkedStack) IsEmpty() bool {
 }
 
 // Push item to stack
-func (s *LinkedStack) Push(v string) error {
+func (s *LinkedStack) Push(v int) error {
 	newItem := node{item: v, next: s.first}
 	s.first = &newItem
 	s.size++
@@ -50,9 +54,9 @@ func (s *LinkedStack) Push(v string) error {
 }
 
 // Pop item from stack
-func (s *LinkedStack) Pop() (string, error) {
+func (s *LinkedStack) Pop() (int, error) {
 	if s.IsEmpty() {
-		return "", errors.New("Stack Underflow")
+		return -1, errors.New("Stack Underflow")
 	}
 
 	toReturn := s.first.item
@@ -63,13 +67,13 @@ func (s *LinkedStack) Pop() (string, error) {
 
 // ArrayStack - implemented using fixed size array
 type ArrayStack struct {
-	s  []string // stack as the array
-	sp int      // stack pointer
+	s  []int // stack as the array
+	sp int   // stack pointer
 }
 
 // NewArrayStack - constructor for ArrayStack
 func NewArrayStack(capacity int) *ArrayStack {
-	return &ArrayStack{s: make([]string, capacity), sp: -1}
+	return &ArrayStack{s: make([]int, capacity), sp: -1}
 }
 
 // IsEmpty ...
@@ -78,7 +82,7 @@ func (s *ArrayStack) IsEmpty() bool {
 }
 
 // Push ...
-func (s *ArrayStack) Push(v string) error {
+func (s *ArrayStack) Push(v int) error {
 	if s.sp+1 > len(s.s)-1 {
 		return errors.New("Stack Overflow")
 	}
@@ -88,9 +92,9 @@ func (s *ArrayStack) Push(v string) error {
 }
 
 // Pop ...
-func (s *ArrayStack) Pop() (string, error) {
+func (s *ArrayStack) Pop() (int, error) {
 	if s.IsEmpty() {
-		return "", errors.New("Stack Underflow")
+		return -1, errors.New("Stack Underflow")
 	}
 	toReturn := s.s[s.sp]
 	s.sp--
