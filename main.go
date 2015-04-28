@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/rcmgleite/algorithms/graph"
-	"github.com/rcmgleite/algorithms/stack"
 )
 
 func main() {
@@ -70,33 +69,58 @@ func main() {
 	// fmt.Println("Final result ", v1)
 	// fmt.Printf("arraySorted = %v\n", customSort.IsSorted(v1))
 
+	// var vertexNum = 6
+	// g := graph.NewGraph(vertexNum)
+	// g.AddEdge(0, 5)
+	// g.AddEdge(2, 4)
+	// g.AddEdge(2, 3)
+	// g.AddEdge(1, 2)
+	// g.AddEdge(0, 1)
+	// g.AddEdge(3, 4)
+	// g.AddEdge(3, 5)
+	// g.AddEdge(0, 2)
+	//
+	// for i := 0; i < vertexNum; i++ {
+	// 	g.PrintAdjList(i)
+	// }
+	//
+	// fmt.Printf("\n\n")
+	//
+	// bfsPaths := graph.NewBfsPaths(*g, 0)
+	// fmt.Println("Marked : ", bfsPaths.Marked)
+	// fmt.Println("Edge To : ", bfsPaths.EdgeTo)
+	// fmt.Println("Dist To : ", bfsPaths.DistTo)
+
 	var vertexNum = 13
 	g := graph.NewGraph(vertexNum)
-	g.AddEdge(0, 1)
-	g.AddEdge(0, 2)
 	g.AddEdge(0, 5)
-	g.AddEdge(0, 6)
 	g.AddEdge(4, 3)
-	g.AddEdge(5, 3)
-	g.AddEdge(7, 8)
+	g.AddEdge(0, 1)
 	g.AddEdge(9, 12)
 	g.AddEdge(6, 4)
 	g.AddEdge(5, 4)
+	g.AddEdge(0, 2)
 	g.AddEdge(11, 12)
 	g.AddEdge(9, 10)
+	g.AddEdge(0, 6)
+	g.AddEdge(7, 8)
 	g.AddEdge(9, 11)
+	g.AddEdge(5, 3)
 
 	for i := 0; i < vertexNum; i++ {
 		g.PrintAdjList(i)
 	}
 
+	cc := graph.NewCC(g)
+
+	fmt.Println("Marked = ", cc.Marked)
+	fmt.Println("Ids = ", cc.Ids)
+
+	fmt.Printf("IsConnected(7, 8) = %v\n", cc.IsConnected(7, 8))
+	fmt.Printf("IsConnected(7, 9) = %v\n", cc.IsConnected(7, 9))
+	fmt.Printf("IsConnected(9, 12) = %v\n", cc.IsConnected(9, 12))
+	fmt.Printf("IsConnected(0, 1) = %v\n", cc.IsConnected(0, 1))
+	fmt.Printf("IsConnected(3, 8) = %v\n", cc.IsConnected(3, 8))
+
 	fmt.Printf("\n\n")
-
-	dfsPaths := graph.NewDfsPaths(*g, 0)
-	fmt.Println(dfsPaths.Marked)
-	fmt.Println(dfsPaths.EdgeTo)
-
-	fmt.Printf("Has Path to %d = %v\n", 3, dfsPaths.HasPathTo(3))
-
-	stack.Print(dfsPaths.PathTo(3))
 }

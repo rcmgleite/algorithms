@@ -1,7 +1,7 @@
 package queue
 
 type node struct {
-	item string
+	item int
 	next *node
 }
 
@@ -18,7 +18,7 @@ func (q *LinkedQueue) IsEmpty() bool {
 }
 
 //Enqueue ...
-func (q *LinkedQueue) Enqueue(value string) {
+func (q *LinkedQueue) Enqueue(value int) {
 	oldLast := q.last
 	q.last = &node{item: value, next: nil}
 
@@ -32,7 +32,7 @@ func (q *LinkedQueue) Enqueue(value string) {
 }
 
 // Dequeue ...
-func (q *LinkedQueue) Dequeue() string {
+func (q *LinkedQueue) Dequeue() int {
 	toReturn := q.first.item
 	q.first = q.first.next
 	q.size--

@@ -40,6 +40,11 @@ type node struct {
 	next *node
 }
 
+// Size ...
+func (s *LinkedStack) Size() int {
+	return s.size
+}
+
 // IsEmpty returns true if stack is empty
 func (s *LinkedStack) IsEmpty() bool {
 	return s.first == nil
