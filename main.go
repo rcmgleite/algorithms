@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/rcmgleite/algorithms/graph"
+	"github.com/rcmgleite/algorithms/hashTable"
 )
 
 func main() {
@@ -91,36 +91,48 @@ func main() {
 	// fmt.Println("Edge To : ", bfsPaths.EdgeTo)
 	// fmt.Println("Dist To : ", bfsPaths.DistTo)
 
-	var vertexNum = 13
-	g := graph.NewGraph(vertexNum)
-	g.AddEdge(0, 5)
-	g.AddEdge(4, 3)
-	g.AddEdge(0, 1)
-	g.AddEdge(9, 12)
-	g.AddEdge(6, 4)
-	g.AddEdge(5, 4)
-	g.AddEdge(0, 2)
-	g.AddEdge(11, 12)
-	g.AddEdge(9, 10)
-	g.AddEdge(0, 6)
-	g.AddEdge(7, 8)
-	g.AddEdge(9, 11)
-	g.AddEdge(5, 3)
+	// var vertexNum = 13
+	// g := graph.NewGraph(vertexNum)
+	// g.AddEdge(0, 5)
+	// g.AddEdge(4, 3)
+	// g.AddEdge(0, 1)
+	// g.AddEdge(9, 12)
+	// g.AddEdge(6, 4)
+	// g.AddEdge(5, 4)
+	// g.AddEdge(0, 2)
+	// g.AddEdge(11, 12)
+	// g.AddEdge(9, 10)
+	// g.AddEdge(0, 6)
+	// g.AddEdge(7, 8)
+	// g.AddEdge(9, 11)
+	// g.AddEdge(5, 3)
+	//
+	// for i := 0; i < vertexNum; i++ {
+	// 	g.PrintAdjList(i)
+	// }
+	//
+	// cc := graph.NewCC(g)
+	//
+	// fmt.Println("Marked = ", cc.Marked)
+	// fmt.Println("Ids = ", cc.Ids)
+	//
+	// fmt.Printf("IsConnected(7, 8) = %v\n", cc.IsConnected(7, 8))
+	// fmt.Printf("IsConnected(7, 9) = %v\n", cc.IsConnected(7, 9))
+	// fmt.Printf("IsConnected(9, 12) = %v\n", cc.IsConnected(9, 12))
+	// fmt.Printf("IsConnected(0, 1) = %v\n", cc.IsConnected(0, 1))
+	// fmt.Printf("IsConnected(3, 8) = %v\n", cc.IsConnected(3, 8))
+	//
+	// fmt.Printf("\n\n")
 
-	for i := 0; i < vertexNum; i++ {
-		g.PrintAdjList(i)
-	}
+	ht := &hashTable.HashTable{}
+	ht.Put(0, 11)
+	ht.Put(128, 22)
+	ht.Put(129, 33)
+	ht.Put(2, 44)
 
-	cc := graph.NewCC(g)
-
-	fmt.Println("Marked = ", cc.Marked)
-	fmt.Println("Ids = ", cc.Ids)
-
-	fmt.Printf("IsConnected(7, 8) = %v\n", cc.IsConnected(7, 8))
-	fmt.Printf("IsConnected(7, 9) = %v\n", cc.IsConnected(7, 9))
-	fmt.Printf("IsConnected(9, 12) = %v\n", cc.IsConnected(9, 12))
-	fmt.Printf("IsConnected(0, 1) = %v\n", cc.IsConnected(0, 1))
-	fmt.Printf("IsConnected(3, 8) = %v\n", cc.IsConnected(3, 8))
-
-	fmt.Printf("\n\n")
+	ht.PrintAllEntries()
+	fmt.Println("ht.Get(0) = ", ht.Get(0))
+	fmt.Println("ht.Get(1) = ", ht.Get(128))
+	fmt.Println("ht.Get(2) = ", ht.Get(129))
+	fmt.Println("ht.Get(3) = ", ht.Get(2))
 }
