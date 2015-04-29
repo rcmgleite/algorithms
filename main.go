@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/rcmgleite/algorithms/hashTable"
+	"github.com/rcmgleite/algorithms/customSort"
 )
 
 func main() {
@@ -124,15 +124,22 @@ func main() {
 	//
 	// fmt.Printf("\n\n")
 
-	ht := &hashTable.HashTable{}
-	ht.Put(0, 11)
-	ht.Put(128, 22)
-	ht.Put(129, 33)
-	ht.Put(2, 44)
+	// ht := &hashTable.HashTable{}
+	// ht.Put(0, 11)
+	// ht.Put(128, 22)
+	// ht.Put(129, 33)
+	// ht.Put(2, 44)
+	//
+	// ht.PrintAllEntries()
+	// fmt.Println("ht.Get(0) = ", ht.Get(0))
+	// fmt.Println("ht.Get(1) = ", ht.Get(128))
+	// fmt.Println("ht.Get(2) = ", ht.Get(129))
+	// fmt.Println("ht.Get(3) = ", ht.Get(2))
 
-	ht.PrintAllEntries()
-	fmt.Println("ht.Get(0) = ", ht.Get(0))
-	fmt.Println("ht.Get(1) = ", ht.Get(128))
-	fmt.Println("ht.Get(2) = ", ht.Get(129))
-	fmt.Println("ht.Get(3) = ", ht.Get(2))
+	v1 := []int{12, 4, 5, 2, 3, 11, 6, 7, 10, 9}
+	fmt.Println("Initial array: ", v1)
+	customSort.QuickSort(v1)
+	fmt.Println("Final result ", v1)
+	fmt.Printf("arraySorted = %v\n", customSort.IsSorted(v1))
+
 }

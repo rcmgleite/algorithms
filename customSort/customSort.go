@@ -125,7 +125,6 @@ func Shuffle(array []int) {
 	rand.Seed(time.Now().UTC().UnixNano())
 	for i := 0; i < len(array); i++ {
 		r := rand.Intn(i + 1)
-		fmt.Println(r)
 		Swap(array, i, r)
 	}
 }
@@ -146,4 +145,56 @@ func IsSorted(array []int) bool {
 	}
 
 	return true
+}
+
+// QuickSort ... recursive implementation
+func QuickSort(array []int) {
+	Shuffle(array) // VERY IMPORTANT TO SHUFFLE THE ARRAY BEFORE BEGINNING
+	fmt.Println("Shuffled array = ", array)
+	recQuickSort(array, 0, len(array)-1)
+}
+
+func recQuickSort(array []int, lo, hi int) {
+	if hi <= lo { //recursive stop condition
+		return
+	}
+
+	j := Partition(array, lo, hi)
+	recQuickSort(array, lo, j-1) // Sort left part of array
+	recQuickSort(array, j+1, hi) // Sort rigth part of array
+}
+
+// Partition step for Quick-sort
+// return the index of the partition center
+func Partition(array []int, lo, hi int) int {
+	i := lo + 1
+	j := hi
+
+	for {
+		// search for element < partition center (partition center = array[0])
+		for array[i] < array[lo] {
+			i++
+			if i == hi { // just to be sure not get outside boundary
+				break
+			}
+		}
+
+		// search for element > partition center
+		for array[j] > array[lo] {
+			j--
+			if j == lo { // just to be sure not get outside boundary
+				break
+			}
+		}
+
+		// When i cross j, break
+		if i >= j {
+			break
+		}
+
+		Swap(array, i, j) // execute the swap
+	}
+
+	Swap(array, lo, j) // Swap the partition center with the rigthmost element < partition center
+	return j
 }
