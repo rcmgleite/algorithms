@@ -1,10 +1,6 @@
 package main
 
-import (
-	"fmt"
-
-	"github.com/rcmgleite/algorithms/binaryHeap"
-)
+import "github.com/rcmgleite/algorithms/binaryHeap"
 
 func main() {
 	// v := []int{1, 2, 3, 4, 5, 6, 7, 8, 10}
@@ -153,14 +149,25 @@ func main() {
 	//
 	// fmt.Println(s.Min())
 
-	h := binaryHeap.NewHeap(10)
-	for i := 1; i <= 10; i++ {
-		h.Insert(i)
-	}
-	h.PrintArray()
-	fmt.Println(h.DeleteMax())
-	h.PrintArray()
+	h := binaryHeap.NewHeap(11)
+	// for i := 1; i <= 10; i++ {
+	// 	h.Insert(i)
+	// }
+	h.Insert(33)
+	h.Insert(1)
+	h.Insert(44)
+	h.Insert(23)
+	h.Insert(17)
+	h.Insert(80)
+	h.Insert(8)
+	h.Insert(13)
+	h.Insert(72)
+	h.Insert(9)
 
-	// h.Sort()
+	h.PrintArray()
+	// fmt.Println(h.DeleteMax())
 	// h.PrintArray()
+
+	h.Sort()
+	h.PrintArray()
 }

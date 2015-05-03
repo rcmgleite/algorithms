@@ -29,10 +29,12 @@ func (h *MyHeap) Sort() {
 	for k := h.size / 2; k >= 1; k-- { // construct the heap propertly
 		h.Sink(k)
 	}
-	// swap root with lowest , remove the 'new lowest' and sink the 'new root'
-	swap(h.a, 1, h.size)
-	h.size--
-	h.Sink(1)
+	// swap root with lowest , remove the 'new lowest'(higher value) and sink the 'new root'(lower value)
+	for h.size > 1 {
+		swap(h.a, 1, h.size)
+		h.size--
+		h.Sink(1)
+	}
 }
 
 // Swim will place the node in the correct position on the tree
@@ -50,16 +52,17 @@ func (h *MyHeap) Swim(k int) {
 // This means that the node will go down on the tree, until no violation is found
 func (h *MyHeap) Sink(k int) {
 	for 2*k <= h.size {
-		h.PrintArray()
+		// h.PrintArray()
 		j := 2 * k                           // find first child
 		if j < h.size && h.a[j] < h.a[j+1] { // verify if this child is the larger
 			j++ //if not, increment j to get the index of the larger
 		}
-		if h.a[j] < h.a[k] { // if parent < larger child, swap them
+		if h.a[j] < h.a[k] { // if child < father no need to swap anymore
+
 			break
 		}
-		swap(h.a, k, j)
-		k = j // make it run again for the father of the k parameter
+		swap(h.a, k, j) // swap father with larger child
+		k = j           // make it run again
 	}
 }
 
@@ -68,17 +71,17 @@ func (h *MyHeap) Sink(k int) {
 // and than sink the new root node unitl no violation is found
 func (h *MyHeap) DeleteMax() int {
 	max := h.a[1] // the max value will be always the root of the tree, located ate index 1
-	swap(h.a, 1, h.size-1)
-	// h.a[h.size-1] = -1
+	swap(h.a, 1, h.size)
+	h.size--
 	h.Sink(1)
 	return max
 }
 
 // Insert new node on heap
 func (h *MyHeap) Insert(key int) {
-	h.a[h.size] = key // add new node at the end of the tree
 	h.size++
-	h.Swim(h.size - 1) // swim it to its rigth position
+	h.a[h.size] = key // add new node at the end of the tree
+	h.Swim(h.size)    // swim it to its rigth position
 }
 
 //helper function
