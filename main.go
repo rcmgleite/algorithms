@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/rcmgleite/algorithms/customSort"
+	"github.com/rcmgleite/algorithms/binaryHeap"
 )
 
 func main() {
@@ -136,10 +136,31 @@ func main() {
 	// fmt.Println("ht.Get(2) = ", ht.Get(129))
 	// fmt.Println("ht.Get(3) = ", ht.Get(2))
 
-	v1 := []int{12, 4, 5, 2, 3, 11, 6, 7, 10, 9}
-	fmt.Println("Initial array: ", v1)
-	customSort.QuickSort(v1)
-	fmt.Println("Final result ", v1)
-	fmt.Printf("arraySorted = %v\n", customSort.IsSorted(v1))
+	// v1 := []int{12, 4, 5, 2, 3, 11, 6, 7, 10, 9}
+	// fmt.Println("Initial array: ", v1)
+	// customSort.QuickSort(v1)
+	// fmt.Println("Final result ", v1)
+	// fmt.Printf("arraySorted = %v\n", customSort.IsSorted(v1))
+	//
+	// s := stack.LinkedStack{}
+	// s.Push(4)
+	// s.Push(5)
+	// s.Push(10)
+	// s.Push(5)
+	// s.Push(20)
+	// s.Push(50)
+	// stack.Print(&s)
+	//
+	// fmt.Println(s.Min())
 
+	h := binaryHeap.NewHeap(10)
+	for i := 1; i <= 10; i++ {
+		h.Insert(i)
+	}
+	h.PrintArray()
+	fmt.Println(h.DeleteMax())
+	h.PrintArray()
+
+	// h.Sort()
+	// h.PrintArray()
 }

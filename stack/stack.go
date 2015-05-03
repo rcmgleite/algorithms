@@ -31,6 +31,7 @@ func Print(s Stacker) {
 // LinkedStack - implemented using a linked list
 type LinkedStack struct {
 	first *node
+	min   *node
 	size  int
 }
 
@@ -50,11 +51,23 @@ func (s *LinkedStack) IsEmpty() bool {
 	return s.first == nil
 }
 
+// Min returns the min value on stack
+func (s *LinkedStack) Min() int {
+	return s.min.item
+}
+
 // Push item to stack
 func (s *LinkedStack) Push(v int) error {
 	newItem := node{item: v, next: s.first}
 	s.first = &newItem
 	s.size++
+	if s.min != nil {
+		if s.min.item > s.first.item {
+			s.min = s.first
+		}
+	} else {
+		s.min = &newItem
+	}
 	return nil
 }
 
@@ -104,4 +117,49 @@ func (s *ArrayStack) Pop() (int, error) {
 	toReturn := s.s[s.sp]
 	s.sp--
 	return toReturn, nil
+}
+
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+///////////////////////// 3 stacks with single array ///////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+// Aproach 1: divide the array in equal parts; -- Dummy
+const (
+	// StackSize ...
+	StackSize = 300
+)
+
+// TripleStack ...
+type TripleStack struct {
+	array []int
+	sps   [3]int
+}
+
+// NewTripleStack ... each stack will have StackSize
+func NewTripleStack() *TripleStack {
+	array := make([]int, 3*StackSize)
+	return &TripleStack{array: array}
+}
+
+// Push ...
+func (s *TripleStack) Push(value int, stack int) {
+	s.sps[stack]++
+	arrayIndex := stack*StackSize + s.sps[stack]
+	s.array[arrayIndex] = value
+}
+
+// Pop ...
+// in this function, the pop will NOT clear the array, but the position
+// will be free to be overwrited
+func (s *TripleStack) Pop(stack int) int {
+	arrayIndex := stack*StackSize + s.sps[stack]
+	s.sps[stack]--
+	return s.array[arrayIndex]
+}
+
+// IsEmpty ...
+func (s *TripleStack) IsEmpty(stack int) bool {
+	return s.sps[stack] == 0
 }
