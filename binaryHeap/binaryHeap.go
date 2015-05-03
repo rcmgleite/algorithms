@@ -25,6 +25,13 @@ func (h *MyHeap) PrintArray() {
 }
 
 // Sort ... At the end, the array of the heap will be sorted
+// FIRST SORT ALGORITHM IN-PLACE WITH N*LOG(N) WORST-CASE
+// 		i) Merge-sort: not in-place -> needs linear extra space
+//		ii) Quick-sort: it is in place but N² worst case
+// Problems:
+//	1) Not-stable
+//  2) Makes poor use of cache mem
+//  3) Inner loop longer than Quick-sort
 func (h *MyHeap) Sort() {
 	for k := h.size / 2; k >= 1; k-- { // construct the heap propertly
 		h.Sink(k)

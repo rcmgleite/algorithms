@@ -145,7 +145,7 @@ func IsSorted(array []int) bool {
 	return true
 }
 
-// QuickSort ... recursive implementation - no need for extra space(better than MergeSort)
+// QuickSort ... recursive implementation - no need for extra space(better than MergeSort) in-place
 // Quick-sort and Merge-sort are both N*log(N) but quicksort is faster
 // PS: Quick-sort is NOT STABLE
 func QuickSort(array []int) {

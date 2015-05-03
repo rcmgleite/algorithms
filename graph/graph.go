@@ -131,13 +131,14 @@ func NewBfsPaths(g Graph, s int) *BfsPaths {
 
 // Apply breadth-first search - usade on mazes too
 // facebook hacker cup laser maze - shortest path algorithm
+// It utilizes a QUEUE instead of a stack (DFS)
 func (bfs *BfsPaths) apply(v int) {
 	bfs.Marked[v] = true
 	bfs.Queue.Enqueue(v)
 
-	for !bfs.Queue.IsEmpty() {
+	for !bfs.Queue.IsEmpty() { // until queue is empty
 		v = bfs.Queue.Dequeue()
-		for w := bfs.g.AdjIterator(v); w != nil; w = w.Next() {
+		for w := bfs.g.AdjIterator(v); w != nil; w = w.Next() { //search through every adj node
 			if !bfs.Marked[w.Value.(int)] {
 				bfs.Queue.Enqueue(w.Value.(int))
 				bfs.EdgeTo[w.Value.(int)] = v
