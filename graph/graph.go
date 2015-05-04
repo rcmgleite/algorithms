@@ -134,7 +134,7 @@ func NewBfsPaths(g Graph, s int) *BfsPaths {
 // It utilizes a QUEUE instead of a stack (DFS)
 func (bfs *BfsPaths) apply(v int) {
 	bfs.Marked[v] = true
-	bfs.Queue.Enqueue(v)
+	bfs.Queue.Enqueue(v) //a
 
 	for !bfs.Queue.IsEmpty() { // until queue is empty
 		v = bfs.Queue.Dequeue()
