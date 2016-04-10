@@ -1,5 +1,5 @@
 # algorithms
-The project purpose are
+The project purposes are
   - Study golang(golang.org)
   - Study algorithms
 

@@ -152,7 +152,7 @@ func (s *TripleStack) Push(value int, stack int) {
 
 // Pop ...
 // in this function, the pop will NOT clear the array, but the position
-// will be free to be overwrited
+// will be free to be overwritten
 func (s *TripleStack) Pop(stack int) int {
 	arrayIndex := stack*StackSize + s.sps[stack]
 	s.sps[stack]--
